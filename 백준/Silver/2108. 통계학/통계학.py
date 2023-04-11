@@ -1,35 +1,34 @@
 import sys
-input=sys.stdin.readline
+from collections import defaultdict
+input = sys.stdin.readline
 
-n=int(input())
-arr=[]
+N = int(input())    # 홀수
+nums = []
+count_dict = defaultdict(int)
 
-for i in range(n):
-    arr.append(int(input()))
+for _ in range(N):
+    num = int(input())  # 정수
+    nums.append(num)
+    count_dict[num] += 1
+nums.sort()
 
-arr.sort()#중앙값을 구하기 위해 정렬
+# 산술평균
+avg = sum(nums) / N
+print(round(avg))
 
-print(round(sum(arr)/len(arr)))#1) 산술평균
-print(arr[len(arr)//2])#2) 중앙값
+# 중앙값
+mid = N // 2
+print(nums[mid])
 
-#최빈값
-dic=dict()
-for i in arr:#빈도수 구하기
-    if i in dic:
-        dic[i]+=1
-    else:
-        dic[i]=1
-        
-mx=max(dic.values())#빈도수 중 최대값 구하기
-mx_dic=[]#최빈값 숫자를 저장할 배열
+# 최빈값
+count_lst = sorted(list(zip(count_dict.keys(), count_dict.values())), key=lambda x: (-x[1], x[0]))
+# print(count_lst)
+if len(count_lst) == 1:
+    print(count_lst[0][0])
+elif count_lst[0][1] == count_lst[1][1]:
+    print(count_lst[1][0])
+else:
+    print(count_lst[0][0])
 
-for i in dic:#빈도수 딕셔너리에서
-    if mx==dic[i]:#최빈값의 key저장
-        mx_dic.append(i)
-
-if len(mx_dic)>1:#최빈값이 여러개라면
-    print(mx_dic[1])#두번째로 작은 값  3)최빈값
-else:#하나라면
-    print(mx_dic[0])#해당 값 출력  3)최빈값
-    
-print(max(arr)-min(arr))#4) 범위
+# 최대최소 차이
+print(max(nums)-min(nums))
