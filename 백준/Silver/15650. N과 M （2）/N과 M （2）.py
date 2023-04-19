@@ -2,20 +2,19 @@ import sys
 input = sys.stdin.readline
 
 
-# i: 선택한 갯수, k: 현재 원소 인덱스, m: 최종 선택 갯수
-def comb(i, k, m):
-    if i == m:
-        print(*result)
+def sol(a, M):
+    if a == M:
+        print(*s)
         return
-    for j in range(k, N):
-        result[i] = lst[j]
-        comb(i+1, j+1, m)
 
+    for i in range(s[a-1], N):
+        s[a] = data[i]
+        sol(a+1, M)
 
 N, M = map(int, input().split())
-lst = list(range(1, N+1))
-result = [0] * M
-visited = [0] * N
 
-comb(0, 0, M)
+data = list(x for x in range(1, N+1))
+s = [0] * M
+
+sol(0, M)
 
