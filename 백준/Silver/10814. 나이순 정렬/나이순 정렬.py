@@ -1,12 +1,13 @@
+import sys
+input = sys.stdin.readline
+
 N = int(input())
+lst = []
+for _ in range(N):
+    (age, name) = input().split()
+    lst.append((_, int(age), name))
 
-result = dict()
-for i in range(N):
-    k, v = input().split()
-    result[int(k)] = result.get(int(k), []) + [v]
+lst = sorted(lst, key=lambda x: (x[1], x[0]))
 
-age_sort = sorted(result.items())
-
-for i in age_sort:
-    for j in i[1]:
-        print(int(i[0]), j)
+for _ in range(N):
+    print(*lst[_][1:])
