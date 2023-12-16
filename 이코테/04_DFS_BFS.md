@@ -80,7 +80,7 @@
 
   연결되어 있지 않은 노드끼리는 무한의 비용이라고 작성한다.
 
-  <img alt="Adjacency_Matrix" src="/images/Adjacency_Matrix.png" width="100" height="100" />
+  <img alt="Adjacency_Matrix" src="./images/Adjacency_Matrix.png" width="100" height="100" />
 
 <details>
   <summary>예제 코드</summary>
