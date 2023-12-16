@@ -1,18 +1,17 @@
-# N, M = map(int, input().split())
-# A, B, d = map(int, input().split())
-#
-# data = [list(map(int, input().split())) for _ in range(N)]
-N, M = 4, 4
-A, B, d = 1, 1, 0
-data = [
-    [1, 1, 1, 1], [1, 0, 0, 1],
-    [1, 1, 0, 1], [1, 1, 1, 1]
-]
+N, M = map(int, input().split())
+A, B, d = map(int, input().split())
+
+data = [list(map(int, input().split())) for _ in range(N)]
+# N, M = 4, 4
+# A, B, d = 1, 1, 0
+# data = [
+#     [1, 1, 1, 1], [1, 0, 0, 1],
+#     [1, 1, 0, 1], [1, 1, 1, 1]
+# ]
 
 visited = list([0] * M for _ in range(N))
 visited[A][B] = 1
 cnt = 1
-
 
 while 1:
     # 네 방향
