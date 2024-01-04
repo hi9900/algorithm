@@ -1,15 +1,25 @@
-N, M, K = map(int, input().split())
-numbers = list(map(int, input().split()))
+n = input()
 
-# M 안에서 K+1이 들어갈 수 있는 횟수
-max = M // (K+1)
-# 그러고 남은 갯수
-plus = M % (K+1)
+# 좌표는 8 x 8 (1~8, a~h)
 
-numbers.sort(reverse=True)
-# 제일 큰 수
-number_fst = numbers[0]
-# 다음 큰 수
-number_snd = numbers[1]
+l = ["a", "b", "c", "d", "e", "f", "g", "h"]
+c = ["1", "2", "3", "4", "5", "6", "7", "8"]
 
-print(number_fst * K * (max + plus) + number_snd * max)
+# 나이트의 좌표
+ni = c.index(n[1])
+nj = l.index(n[0])
+
+# 이동할 수 있는 경우
+dxy = [(-2, 1), (-2, -1), (2, 1), (2, -1),
+       (1, -2), (-1, -2), (1, 2), (-1, 2)]
+
+cnt = 0
+for dx, dy in dxy:
+    nx = ni + dx
+    ny = nj + dy
+
+    # 좌표를 벗어나지 않으면,
+    if 0 <= nx <= 7 and 0 <= ny <= 7:
+        cnt += 1
+
+print(cnt)

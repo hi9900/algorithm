@@ -1,49 +1,25 @@
 N, M = map(int, input().split())
-A, B, d = map(int, input().split())
+maze = [list(map(int, input())) for _ in range(N)]
 
-data = [list(map(int, input().split())) for _ in range(N)]
-# N, M = 4, 4
-# A, B, d = 1, 1, 0
-# data = [
-#     [1, 1, 1, 1], [1, 0, 0, 1],
-#     [1, 1, 0, 1], [1, 1, 1, 1]
-# ]
+board = [[999] * M for _ in range(N)]
 
-visited = list([0] * M for _ in range(N))
-visited[A][B] = 1
-cnt = 1
+dij = [(-1, 0), (0, -1), (1, 0), (0, 1)]
 
-while 1:
-    # 네 방향
-    for i in range(4):
-        #  왼쪽 방향: 북 동 남 서 -> 왼, 아래, 오, 위
-        fst = [(0, -1), (1, 0), (0, 1), (-1, 0)]
-        dx, dy = fst[d]
-        nx, ny = A + dx, B + dy
+board[0][0] = 1
+stack = [(0, 0, 1)]
 
-        # nx, ny는 맵 안
-        if nx < 0 or nx >= N or ny < 0 or ny >= M:
-            continue
+while stack:
+    i, j, step = stack.pop()
 
-        # 가보지 않았고, 육지
-        if visited[nx][ny] == 0 and data[nx][ny] == 0:
-            A, B, d = nx, ny, d
-            visited[nx][ny] = 1
-            cnt += 1
-            break
+    if maze[i][j] == 1:
+        for di, dj in dij:
+            ni, nj = i + di, j + dj
+            # 범위 밖
+            if ni < 0 or nj < 0 or ni >= N or nj >= M:
+                continue
+            # 다음 값이 1이고, 이동 횟수가 크면 작은걸로 수정
+            if maze[ni][nj] == 1 and board[ni][nj] > step+1:
+                board[ni][nj] = step+1
+                stack.append((ni, nj, step+1))
 
-        else:
-            d = (d+1) % 4
-
-    else:
-        # 뒤로 한 칸: 북, 동, 남, 서 -> 아래, 왼, 위, 오
-        back = [(-1, 0), (0, -1), (1, 0), (0, +1)]
-        bx, by = back[d]
-        nx, ny = A + bx, B + by
-
-        if nx < 0 or nx >= N or ny < 0 or ny >= M or data[nx][ny] == 1:
-            break
-
-        A, B = nx, ny
-
-print(cnt)
+print(board[N-1][M-1])
