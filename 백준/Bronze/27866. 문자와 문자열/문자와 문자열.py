@@ -1,7 +1,7 @@
 import sys
 input = sys.stdin.readline
 
-S = input().rstrip()
+word = input()
 i = int(input())
 
-print(S[i-1])
+print(word[i-1])
