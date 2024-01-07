@@ -1,10 +1,7 @@
-import sys
-input = sys.stdin.readline
+A = input()
+B = input()
 
-jh = input().rstrip()
-doctor = input().rstrip()
-
-if jh.count("a") >= doctor.count("a"):
-    print("go")
+if B in A:
+    print('go')
 else:
-    print("no")
+    print('no')
