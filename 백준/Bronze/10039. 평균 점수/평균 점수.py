@@ -1,7 +1,11 @@
 import sys
 input = sys.stdin.readline
-sum = 0
+
+scores = [40] * 5
+
 for _ in range(5):
-    x = int(input())
-    sum += x if x >= 40 else 40
-print(sum//5)
+    score = int(input())
+    if score >= 40:
+        scores[_] = score
+
+print(int(sum(scores) / 5))
