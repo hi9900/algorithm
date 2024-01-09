@@ -2,4 +2,5 @@ import sys
 input = sys.stdin.readline
 
 K, N, M = map(int, input().split())
-print(K * N - M if K * N - M >= 0 else 0)
+pay = K * N
+print(0) if pay < M else print(pay - M)

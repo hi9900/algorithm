@@ -2,7 +2,9 @@ import sys
 input = sys.stdin.readline
 
 while 1:
-    m, f = map(int, input().split())
-    if m == f == 0:
+    M, F = map(int, input().split())
+    if M + F == 0:
         break
-    print(m+f)
+
+    print(M + F)
+    
