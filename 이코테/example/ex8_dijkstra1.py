@@ -1,29 +1,5 @@
-"""
-입력 예시
-6 11
-1
-1 2 2
-1 3 5
-1 4 1
-2 3 3
-2 4 2
-3 2 3
-3 6 5
-4 3 3
-4 5 1
-5 3 1
-5 6 2
-
-출력 예시
-0
-2
-3
-1
-2
-4
-"""
-
 import sys
+sys.stdin = open('ex8_dijkstra_input.txt')
 input = sys.stdin.readline
 # 무한을 표현하는 값을 10억으로 설정
 INF = int(1e9)
@@ -48,7 +24,7 @@ for _ in range(M):
 
 
 # 방문하지 않은 노드 중에서 최단거리가 가장 짧은 노드의 번호 반환
-def get_smalliest_node():
+def get_smallest_node():
     min_value = INF
     index = 0   # 반환할 노드 인덱스
     for i in range(1, N+1):
@@ -70,7 +46,7 @@ def dijkstra(start):
     # 시작 노드를 제외한 전체 n-1개의 노드에 대해 반복
     for i in range(N-1):
         # 현재 최단 거리가 가장 짧은 노드를 방문처리
-        now = get_smalliest_node()
+        now = get_smallest_node()
         visited[now] = True
 
         # 선택한 노드와 연결된 다른 노드를 확인
@@ -87,3 +63,13 @@ dijkstra(start)
 for i in range(1, N+1):
     # 도달할 수 없는 노드는 'INFINITY'로 출력
     print('INFINITY') if distance[i] == INF else print(distance[i])
+
+"""
+출력 예시
+0
+2
+3
+1
+2
+4
+"""
