@@ -1,10 +1,10 @@
-S = list(map(str, input()))
+import sys
+input = sys.stdin.readline
 
-# 97 ~ 122: 26
-# 1 ~ 26
-cnt = [0] * 26
-for i in S:
-    cnt[ord(i)-97] += 1
+arr = [0] * 26
 
-print(*cnt)
+word = input().rstrip()
+for c in word:
+    arr[ord(c) - 97] += 1
 
+print(*arr)
