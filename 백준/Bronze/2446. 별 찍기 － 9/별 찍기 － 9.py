@@ -3,10 +3,9 @@ input = sys.stdin.readline
 
 N = int(input())
 
-for i in range(N):
-    ans = " " * i + "*" * (2*N-1 -2*i)
-    print(ans)
-
-for i in range(N-2, -1, -1):
-    ans = " " * i + "*" * (2 * N - 1 - 2 * i)
-    print(ans)
+star = '*'
+S = 2*N-1 
+for i in range(S, 1, -2):
+    print(f'{star * i:^{S}}'.rstrip())
+for i in range(1, S+1, 2):
+    print(f'{star * i:^{S}}'.rstrip())
