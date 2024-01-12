@@ -1,3 +1,7 @@
-data = list(map(int, input().split()))
-data.sort()
-print(data[1])
+import sys
+input = sys.stdin.readline
+
+arr = list(map(int, input().split()))
+
+arr.sort()
+print(arr[1])
