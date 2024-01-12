@@ -3,6 +3,6 @@ input = sys.stdin.readline
 
 N = int(input())
 
-for i in range(N):
-    ans = " " * (N-i-1) + "*" * (2*i+1)
-    print(ans)
+star = '*'
+for i in range(1, 2*N, 2):
+    print(f'{star * i:^{2*N}}'.rstrip())
