@@ -2,10 +2,9 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
+star = '*'
 
-for i in range(N):
-    ans = "*" * (i+1) + " " * (2*N-2*(i+1)) + "*" * (i+1)
-    print(ans)
-for i in range(N-2, -1, -1):
-    ans = "*" * (i+1) + " " * (2*N-2*(i+1)) + "*" * (i+1)
-    print(ans)
+for i in range(1, N):
+    print(f'{star*i:<{N}}{star*i:>{N}}')
+for i in range(N, 0, -1):
+    print(f'{star*i:<{N}}{star*i:>{N}}')
