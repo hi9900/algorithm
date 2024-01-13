@@ -2,14 +2,20 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-cnt = 1
-next = 6
 
-check = 1
+"""
+1 -> 1
+2 ~ 7 (6) -> 2
+8 ~ 19 (12) -> 3
+20 ~ 37 (18) -> 4
+"""
+
+cnt = 1
+result = 1
 while 1:
-    if cnt >= N:
+    if N <= cnt:
         break
-    check += 1
-    cnt += next
-    next += 6
-print(check)
+    cnt += result * 6
+    result += 1
+
+print(result)
