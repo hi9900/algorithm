@@ -1,11 +1,11 @@
 S = input()
 
-result = 1
-for i in S:
+result = int(S[0])
+for i in S[1:]:
     i = int(i)
-    if i == 0:
-        continue
-
-    result *= i
+    if i <= 1 or result <= 1:
+        result += i
+    else:
+        result *= i
 
 print(result)
