@@ -1,13 +1,18 @@
+import sys
+input = sys.stdin.readline
+
 for _ in range(3):
-    data = list(input())
-    bea = data.count("0")
-    if bea == 1:
-        print("A")
-    elif bea == 2:
-        print("B")
-    elif bea == 3:
-        print("C")
-    elif bea == 4:
-        print("D")
-    else:
-        print("E")
+    data = list(map(int, input().split()))
+    # 등의 갯수
+    check = sum(data)
+
+    if check == 3:
+        print('A')
+    elif check == 2:
+        print('B')
+    elif check == 1:
+        print('C')
+    elif check == 0:
+        print('D')
+    elif check == 4:
+        print('E')
