@@ -3,4 +3,5 @@ input = sys.stdin.readline
 
 N, B = input().split()
 
-print(int(N, int(B)))
+B = int(B)
+print(int(N, B))
