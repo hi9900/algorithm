@@ -1,14 +1,13 @@
+import sys
+input = sys.stdin.readline
 
-sum = 0
-min_x = 99
+sum_n = 0
+min_n = 100
 for _ in range(7):
-    x = int(input())
-    if x % 2:
-        sum += x
-        min_x = min(min_x, x)
+    num = int(input())
 
-if sum != 0:
-    print(sum)
-    print(min_x)
-else:
-    print(-1)
+    if num % 2:
+        sum_n += num
+        min_n = min(min_n, num)
+
+print(sum_n, min_n, sep='\n') if sum_n > 0 else print(-1)
