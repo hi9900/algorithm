@@ -2,13 +2,20 @@ import sys
 input = sys.stdin.readline
 
 N, K = map(int, input().split())
-dong = [0] * N
+A = [0] * N
 for _ in range(N):
-    A = int(input())
-    dong[_] = A
+    A[_] = int(input())
+
 cnt = 0
-for d in dong[::-1]:
-    if K // d:
-        cnt += K//d
-        K %= d
+
+for i in range(N-1, -1, -1):
+    if A[i] > K:
+        continue
+
+    if K == 0:
+        break
+
+    n, K = divmod(K, A[i])
+    cnt += n
+
 print(cnt)
