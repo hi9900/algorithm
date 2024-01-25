@@ -2,28 +2,30 @@ import sys
 input = sys.stdin.readline
 
 K, N = map(int, input().split())
-line = [0] * K
+lst = [0] * K
 for _ in range(K):
-    line[_] = int(input())
+    lst[_] = int(input())
 
-# 이분탐색
-# 가장 긴 랜선을 기준으로 반씩 나눈 값을 나머지 랜선에 적용
-# 자른 개수가 N보다 크면 길이 출력
-s, e = 1, max(line)
-tmp = 0
-while 1:
-    mid = (s+e)//2
+lst.sort()
+# 항상 K <= N
+
+def solution(s, e, lst, N, result):
     if s > e:
-        break
+        return result
 
+    mid = (s+e) // 2
+
+    # mid의 길이로 잘랐을 때 갯수
     cnt = 0
-    for l in line:
-        cnt += l // mid
-
+    for i in lst:
+        cnt += i // mid
+    # 넉넉하면 더 높게
     if cnt >= N:
-        tmp = mid
-        s = mid + 1
-    else:
-        e = mid - 1
+        result = max(result, mid)
+        return solution(mid + 1, e, lst, N, result)
 
-print(e)
+    # 모자르면 더 낮게
+    else:
+        return solution(s, mid-1, lst, N, result)
+
+print(solution(1, max(lst), lst, N, 0))
