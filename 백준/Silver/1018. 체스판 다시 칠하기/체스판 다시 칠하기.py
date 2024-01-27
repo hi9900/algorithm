@@ -1,32 +1,39 @@
 import sys
 input = sys.stdin.readline
 
-
-def chess(a, b):
-    c = board[a][b]
-    draw = 0
-    draw1 = 0
-    for x in range(a, a+8):
-        for y in range(b, b+8):
-            if (x+y) % 2 == (a+b) % 2:
-                if board[x][y] != c:
-                    draw += 1
-                else:
-                    draw1 += 1
-            else:
-                if board[x][y] == c:
-                    draw += 1
-                else:
-                    draw1 += 1
-    return draw, draw1
-
-
 N, M = map(int, input().split())
-board = [input().rstrip() for _ in range(N)]
-result = []
-for i in range(N-7):
-    for j in range(M-7):
-        d1, d2 = chess(i, j)
-        result.append(min(d1, d2))
+board = [list(input().rstrip()) for _ in range(N)]  # N X M
 
-print(min(result))
+# 맨 왼쪽 위칸이
+# 흰색인 경우
+white = 0
+# 검은색인 경우
+black = 0
+
+result = N * M
+
+si, sj = 0, 0
+while 1:
+    white, black = 0, 0
+    for i in range(si, si+8):
+        for j in range(sj, sj+8):
+            if (i + j) % 2 == 0:
+                if board[i][j] == "W":
+                    black += 1
+                else:
+                    white += 1
+            else:
+                if board[i][j] == "W":
+                    white += 1
+                else:
+                    black += 1
+    result = min(result, white, black)
+
+    sj += 1
+    if sj > M - 8:
+        sj = 0
+        si += 1
+    if si > N - 8:
+        break
+
+print(result)
