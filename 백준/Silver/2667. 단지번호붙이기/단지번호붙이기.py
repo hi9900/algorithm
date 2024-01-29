@@ -2,30 +2,35 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-data = [[0]*(N+2)]+[[0] + list(map(int, input().rstrip())) + [0] for _ in range(N)] + [[0]*(N+2)]
-visited = [[0]*(N+2) for _ in range(N+2)]
+data = [list(input().rstrip()) for _ in range(N)]
 
-stack = []
+dxy = ((-1, 0), (1, 0), (0, -1), (0, 1))
+v = [[0] * N for _ in range(N)]
+# 총 단지 수
 cnt = 0
-nums = []
-dij = ((1, 0), (-1, 0), (0, 1), (0, -1))
+houses = []
+stack = []
 
-for i in range(1, N+1):
-    for j in range(1, N+1):
-        if data[i][j] == 1 and visited[i][j] == 0:
+for i in range(N):
+    for j in range(N):
+        if data[i][j] == '1' and v[i][j] == 0:
+            v[i][j] = 1
             cnt += 1
-            stack.append((i, j))
-            num = 0
-            while stack:
-                ii, jj = stack.pop()
-                if visited[ii][jj] == 0:
-                    num += 1
-                    visited[ii][jj] = cnt
-                    for di, dj in dij:
-                        ni, nj = ii+di, jj+dj
-                        if data[ni][nj] == 1 and visited[ni][nj] == 0:
-                            stack.append((ni, nj))
-            nums.append(num)
 
-nums.sort()
-print(cnt, *nums, sep="\n")
+            # 단지 내 집수
+            house = 1
+            stack.append((i, j))
+            while stack:
+                x, y = stack.pop()
+                for dx, dy in dxy:
+                    nx, ny = x+dx, y+dy
+                    if 0 <= nx < N and 0 <= ny < N and data[nx][ny] == '1' and v[nx][ny] == 0:
+                        v[nx][ny] = 1
+                        house += 1
+                        stack.append((nx, ny))
+            houses.append(house)
+            house = 0
+
+print(cnt)
+houses.sort()
+print(*houses, sep="\n")
