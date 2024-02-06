@@ -1,31 +1,30 @@
-#import sys
-#input = sys.stdin.readline
+import sys
+input = sys.stdin.readline
 
 T = int(input())
 for _ in range(T):
     M, N, K = map(int, input().split())
-    data = [[0]*(M+2) for _ in range(N+2)]
-    checked = [[0] * (M+2) for _ in range(N+2)]
+    data = [[0] * M for _ in range(N)]
+    v = [[0] * M for _ in range(N)]
+
     for _ in range(K):
-        x, y = map(int, input().split())
-        data[y+1][x+1] = 1
+        X, Y = map(int, input().split())
+        data[Y][X] += 1
 
-    dij = ((-1, 0), (0, -1), (1, 0), (0, 1))
+    dxy = ((-1, 0), (1, 0), (0, -1), (0, 1))
     cnt = 0
-    stack=[]
-    for i in range(1, N+1):
-        for j in range(1, M+1):
-            if data[i][j] == 1 and checked[i][j] == 0:
-                
-                stack.append((i, j))
+    stack = []
+    for i in range(N):
+        for j in range(M):
+            if data[i][j] == 1 and v[i][j] == 0:
                 cnt += 1
+                stack.append((i, j))
                 while stack:
-                    ii, jj = stack.pop()
-                    checked[ii][jj] = cnt
-                    for di, dj in dij:
-                        ni, nj = ii+di, jj+dj
-                        if data[ni][nj] == 1 and checked[ni][nj] == 0:
+                    x, y = stack.pop()
+                    v[x][y] = 1
+                    for dx, dy in dxy:
+                        ni, nj = x + dx, y + dy
+                        if 0 <= ni < N and 0 <= nj < M and data[ni][nj] == 1 and v[ni][nj] == 0:
                             stack.append((ni, nj))
-
 
     print(cnt)
