@@ -1,7 +1,9 @@
-import sys
-input = sys.stdin.readline
+# 학점 x 과목 평점의 합
+result = 0
+cnt = 0
 
-aver = {
+# 과목 평점
+lst = {
     'A+': 4.5,
     'A0': 4.0,
     'B+': 3.5,
@@ -10,17 +12,14 @@ aver = {
     'C0': 2.0,
     'D+': 1.5,
     'D0': 1.0,
-    'F': 0.0,
+    'F': 0
 }
-s=0
-s_s = 0
+
 for _ in range(20):
-    name, score, rate = map(str, input().split())
-
-    if rate == "P":
+    A, B, C = input().split()
+    if C == 'P':
         continue
+    cnt += float(B)
+    result += lst[C] * float(B)
 
-    s += float(score) * aver[rate]
-    s_s += float(score)
-
-print(s/s_s)
+print(result / cnt)
