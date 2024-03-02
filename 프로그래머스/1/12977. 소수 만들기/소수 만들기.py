@@ -7,7 +7,7 @@ def solution(nums):
         check = a + b + c
         
         # 소수 판별
-        for i in range(2, check // 2):
+        for i in range(2, int(check**(0.5))+1):
             if check % i == 0:
                 break
         else:
