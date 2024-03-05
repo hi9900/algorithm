@@ -1,4 +1,3 @@
-# 11:40 ~
 def calc(numbers, i, sum_n, target):
     global result
     
