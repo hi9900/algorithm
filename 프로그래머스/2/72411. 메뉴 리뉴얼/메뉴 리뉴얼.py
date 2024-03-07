@@ -18,6 +18,9 @@ def solution(orders, course):
     # print(orders)
     # print(arr)
     answer = []
+    
+    tmp, t_cnt = [], 0
+    
     # arr 값이 orders 안에 2개 이상 포함되면, 코스요리 만들기
     for a in arr:
         cnt = 0
@@ -30,26 +33,25 @@ def solution(orders, course):
                     break
             else:
                 cnt += 1
-            
-        # 같은 길이의 코스요리 중 가장 빈도수가 높은 메뉴를 올리기(질문하기 참고함)
-        # 이미 arr는 길이 순으로 정렬되었음
-        if cnt >= 2:
-            # 맨 처음 넣기
-            if not answer:
-                answer.append((a, cnt))
-            # 새로운 길이의 코스이면, 일단 넣기
-            elif answer and len(answer[-1][0]) != len(a):
-                answer.append((a, cnt))
-                continue
-            # 같은 길이고, 이전에 넣은 cnt보다 크면 교체
-            elif answer and len(answer[-1][0]) == len(a) and answer[-1][1] < cnt:
-                while answer and len(answer[-1][0]) == len(a) and answer[-1][1] < cnt:
-                    answer.pop()
-                answer.append((a, cnt))
-            # 같은 길이고, cnt가 같으면 같이 넣기
-            elif answer and len(answer[-1][0]) == len(a) and answer[-1][1] == cnt:
-                answer.append((a, cnt))
-        # 개더러움 ㄷㄷ
         
-    make = list(zip(*answer))
-    return sorted(list(make[0]))
+        # 같은 길이의 코스요리 중 가장 빈도수가 높은 메뉴를 올려야함(질문하기 참고함)
+        if cnt >= 2 and not tmp:
+            tmp.append(a)
+            t_cnt = cnt
+        # 새로운 길이의 코스이면, 이전 길이를 모두 추가하고 바꾸기
+        elif cnt >= 2 and tmp and len(a) != len(tmp[0]):
+            for t in tmp:
+                answer.append(t) 
+            tmp, t_cnt = [a], cnt
+        # 같은 길이의 코스이면, 길이를 비교해서 더 큰거로 바꾸기
+        elif cnt >= 2 and tmp and len(a) == len(tmp[0]):
+            if t_cnt < cnt:
+                tmp, t_cnt = [a], cnt
+            # 같은 길이면 추가
+            elif t_cnt == cnt:
+                tmp.append(a)  
+    # 마지막 길이 추가
+    for t in tmp:
+        answer.append(t) 
+        
+    return sorted(answer)
