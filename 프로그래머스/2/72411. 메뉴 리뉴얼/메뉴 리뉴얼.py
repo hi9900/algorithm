@@ -1,18 +1,30 @@
 from itertools import combinations
+from collections import Counter
 
 def solution(orders, course):
-    arr = set()
     orders.sort(key=lambda x: len(x))
-    
-    for i in range(len(orders)):
+    answer = []
+    for c in course:
+        arr = []
+        for i in range(len(orders)):
         # order[i]로 만들 수 있는 부분집합
-        # 부분집합의 크기는 course의 값
-        for c in course:
             tmp_course = list(combinations(orders[i], c))
-            
             for j in tmp_course:
-                # 아직 후보임
-                arr.add("".join(sorted(j)))
+                arr.append("".join(sorted(j)))
+        # 빈도 순 정렬
+        count_arr = Counter(arr).most_common()
+
+        for a, cnt in count_arr:
+            # 최고 빈도랑 같은 것만 추가
+            if cnt >= 2 and cnt == count_arr[0][1]:
+                answer.append(a)
+            elif cnt < 2:
+                break
+                
+    return sorted(answer)
+
+
+    """
     # arr, cnt
     arr = sorted(list(arr), key=lambda x: (len(x), x))
     # print(orders)
@@ -54,4 +66,4 @@ def solution(orders, course):
     for t in tmp:
         answer.append(t) 
         
-    return sorted(answer)
+    return sorted(answer)"""
