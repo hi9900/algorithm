@@ -1,27 +1,26 @@
 import sys
-input = sys.stdin.readline
 from collections import deque
+input = sys.stdin.readline
 
 T = int(input())
 for _ in range(T):
     N, M = map(int, input().split())
     data = list(map(int, input().split()))
-    p = deque(data)
+
+    q = deque()
+    for i in range(N):
+        q.append((data[i], i))
+
     cnt = 0
-    star = max(p)
-    while p:
-        if p[0] == star:
-            p.popleft()
+    while q:
+        # q의 max 우선순위
+        max_q = max(q)[0]
+
+        if q[0][0] < max_q:
+            q.rotate(-1)
+        else:
+            a, b = q.popleft()
             cnt += 1
-            if M == 0:
+            if b == M:
                 print(cnt)
                 break
-            M -= 1
-            star = max(p)
-
-        elif p[0] < star:
-            p.rotate(-1)
-            if M == 0:
-                M = len(p)-1
-            else:
-                M -= 1
