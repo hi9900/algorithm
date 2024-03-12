@@ -2,9 +2,11 @@ import sys
 input = sys.stdin.readline
 
 A, B = map(int, input().split())
-if B < A:
+if A > B:
     A, B = B, A
-
-mid = list(range(A+1, B))
-print(len(mid))
-print(*mid)
+result = list(range(A+1, B))
+if result:
+    print(len(result))
+    print(*result)
+else:
+    print(0)
