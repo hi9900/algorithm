@@ -1,26 +1,25 @@
 def solution(order):
     N = len(order)
-    # 보조 컨테이너 벨트는 선입후출 > stack
-    stack = []
+    i = 1   # 메인에서 나올 수 있는 상자
+    answer = 0
     
-    result = 0
-    main = 1
-    for i in range(N):
-        # 1. 꺼낼 수 있는 보조를 확인한다.
-        if stack and order[i] == stack[-1]:
-            stack.pop()
-            result += 1
-            continue
+    sub = []
+    for o in order:
+        # 메인에 o가 있음
+        if 0 < i <= o:
+            # i ~ o-1까지 sub에 담고, o를 꺼낸다.
+            sub += list(range(i, o))
+            i = o + 1
             
-        # 2. 남은 메인을 확인한다.
-        # 2-1. 남은 메인에는 실어야 할 상자가 없음
-        if main > order[i]:
-            return result
-        # 2-2. 메인에는 실어야 할 상자가 있고, 
-        # 그 상자가 나올 때까지 보조로 이동
-        # 현재 메인 ~ order[i]-1 까지의 상자가 보조로 이동한다.
+            if i > N:
+                i = 0   # i = 0이면 메인 상자 없음
+        # 서브 값이 o
+        elif sub and sub[-1] == o:
+            sub.pop()
+            
         else:
-            stack += list(range(main, order[i]))
-            main = order[i] + 1
-            result += 1
-    return result
+            return answer
+        
+        answer += 1
+        
+    return answer
