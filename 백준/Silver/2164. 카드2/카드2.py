@@ -1,15 +1,13 @@
-import sys
 from collections import deque
 
+import sys
 input = sys.stdin.readline
 
 N = int(input())
+q = deque(range(1, N+1))
 
-card = range(1, N+1)
-q = deque(card)
-
-while len(q) != 1:
-    q.popleft()
+while q:
+    result = q.popleft()
     q.rotate(-1)
 
-print(q[0])
+print(result)

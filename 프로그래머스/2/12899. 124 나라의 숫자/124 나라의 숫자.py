@@ -1,11 +1,13 @@
 def solution(n):
-    rule = '412'
-    
     answer = ''
-    while n > 0:
+    rule = '412'
+    while 1:
+        if n == 0:
+            break
         n, b = divmod(n, 3)
+        answer += rule[b]
+
         if b == 0:
             n -= 1
-        answer += rule[b]
     
     return answer[::-1]

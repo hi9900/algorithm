@@ -5,9 +5,6 @@ data = list(range(21))
 
 for _ in range(10):
     a, b = map(int, input().split())
-    mid = (b-a+1)//2
-    
-    for i in range(mid):
-        data[a+i], data[b-i] = data[b-i], data[a+i]
+    data[a:b+1] = data[b:a-1:-1]
 
 print(*data[1:])

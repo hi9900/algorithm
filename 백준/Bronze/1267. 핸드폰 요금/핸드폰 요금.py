@@ -2,17 +2,16 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-call = list(map(int, input().split()))
+arr = list(map(int, input().split()))
+Y, M = 0, 0
 
-Young = 0
-Min = 0
-for i in range(N):    
-    Young += 10 * (call[i]//30) + 10
-    Min += 15 * (call[i]//60) + 15
+for time in arr:
+    # 30초마다 10원
+    x1, y1 = divmod(time, 30)
+    Y += (x1 + 1) * 10
+    # 60초마다 15원
+    x2, y2 = divmod(time, 60)
+    M += (x2 + 1) * 15
 
-if Young < Min:
-    print("Y", Young)
-elif Young > Min:
-    print("M", Min)
-else:
-    print("Y M", Young)
+print('M' if Y > M else 'Y' if Y < M else 'Y M', end=" ")
+print(min(Y, M))

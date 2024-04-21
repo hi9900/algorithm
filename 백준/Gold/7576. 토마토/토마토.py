@@ -2,39 +2,29 @@ import sys
 from collections import deque
 input = sys.stdin.readline
 
-
-def bfs():
-    while q:
-        ci, cj, d = q.popleft()
-        for di, dj in ((-1, 0), (1, 0), (0, -1), (0, 1),):
-            ni, nj = ci+di, cj+dj
-            if 0 <= ni < N and 0 <= nj < M:
-                if not v[ni][nj] and data[ni][nj] == 0:
-                    data[ni][nj] += data[ci][cj] + 1
-                    q.append((ni, nj, d+1))
-                    v[ni][nj] = 1
-    return d
-
-
 M, N = map(int, input().split())
-data = [list(map(int, input().split())) for _ in range(N)]
-q = deque()
-v = [[0] * M for _ in range(N)]
+board = [list(map(int, input().split())) for _ in range(N)]
 
+# 1 익은토마토 / 0 안익은토마토 / -1 빈 칸
+dij = ((-1, 0), (1, 0), (0, -1), (0, 1))
+tomato = deque()
+d = 0
 for i in range(N):
     for j in range(M):
-        if data[i][j] == 1:
-            q.append((i, j, 0))
+        if board[i][j] == 1:
+            tomato.append((i, j, 0))
 
-if len(q) == 0:
-    result = -1
-else:
-    result = bfs()
+while tomato:
+    i, j, d = tomato.popleft()
+    for di, dj in dij:
+        ni, nj = i+di, j+dj
+        if 0 <= ni < N and 0 <= nj < M and board[ni][nj] == 0:
+            tomato.append((ni, nj, d+1))
+            board[ni][nj] = 1
 
-# print(data)
-for i in data:
+for i in board:
     if 0 in i:
-        result = -1
+        print(-1)
         break
 
-print(result)
+else: print(d)
