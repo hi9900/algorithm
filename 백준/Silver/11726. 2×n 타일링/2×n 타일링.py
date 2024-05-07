@@ -1,11 +1,9 @@
-import sys
-input = sys.stdin.readline
-
 N = int(input())
-data = [0] * 1001
-data[1] = 1
-data[2] = 2
-for i in range(3, N+1):
-    data[i] += data[i-1] + data[i-2]
+dp = [0] * 1001
+dp[1] = 1
+dp[2] = 2
 
-print(data[N]%10007)
+for i in range(3, N+1):
+    dp[i] = (dp[i-2] + dp[i-1]) % 10_007
+
+print(dp[N])
