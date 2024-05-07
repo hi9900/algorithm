@@ -1,29 +1,28 @@
-import sys
-input = sys.stdin.readline
-
 n = int(input())
-num = 1
-stack = [0]
-result = []
-for _ in range(n):
-    want = int(input())
-    while stack[-1] != want:
-        stack.append(num)
-        num += 1
-        result.append("+")
+stack = []
+ans = ''
+i = 1
 
-        if num > n+1:
-            result.clear()
+for _ in range(n):
+    num = int(input())
+    if i <= num:
+        stack += list(range(i, num))
+        ans += '+' * (num - i) + '+-'
+        i = num + 1
+
+    elif i > num:
+        if not stack:
+            print('NO')
+            break
+        while stack:
+            x = stack.pop()
+            ans += '-'
+
+            if x == num:
+                break
+        else:
+            print('NO')
             break
 
-    if stack[-1] == want:
-        stack.pop()
-        result.append("-")
-
-    if not result:
-        break
-
-if result:
-    print(*result, sep="\n")
 else:
-    print("NO")
+    print('\n'.join(ans))
