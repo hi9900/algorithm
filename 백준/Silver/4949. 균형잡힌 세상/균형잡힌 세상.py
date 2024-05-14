@@ -1,28 +1,26 @@
-import sys
-input = sys.stdin.readline
-
 while 1:
-    data = input().rstrip()
+    stack = []
+    data = input()
+
     if data == '.':
         break
-    stack = []
-    result = 'yes'
-    for i in data:
-        if i in '([':
-            stack.append(i)
-        elif i in ')]':
-            if not stack:
-                result = 'no'
+
+    for c in data:
+        if c == '(':
+            stack.append(c)
+        elif c == '[':
+            stack.append(c)
+
+        elif c == ')':
+            if not stack or stack.pop() != '(':
+                print('no')
                 break
-            else:
-                check = stack.pop()
-                if i == ')' and check != '(':
-                    result = 'no'
-                    break
-                elif i == ']' and check != '[':
-                    result = 'no'
-                    break
-    if stack:
-        result = 'no'
-    print(result)
-    stack.clear()
+        elif c == ']':
+            if not stack or stack.pop() != '[':
+                print('no')
+                break
+    else:
+        if stack:
+            print('no')
+        else:
+            print('yes')
