@@ -2,17 +2,21 @@ import sys
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
-name = {}
-num = {}
-for i in range(N):
-    # 포켓몬 이름
-    p = input().rstrip()
-    name[p] = i+1
-    num[i+1] = p
+
+all_name1 = dict()
+all_name2 = dict()
+
+for _ in range(N):
+    name = input().rstrip()
+    all_name1[_+1] = name
+    all_name2[name] = _+1
 
 for _ in range(M):
-    ques = input().rstrip()
-    if ques.isnumeric():
-        print(num[int(ques)])
+    question = input().rstrip()
+    
+    # 숫자면, 해당 번호의 포켓몬 출력
+    if question.isnumeric():
+        print(all_name1[int(question)])
+    # 알파벳이면, 포켓몬 번호 출력
     else:
-        print(name[ques])
+        print(all_name2[question])
