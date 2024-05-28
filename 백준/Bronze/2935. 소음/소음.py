@@ -1,11 +1,8 @@
-import sys
-input = sys.stdin.readline
+A = int(input())
+a = input()
+B = int(input())
 
-a = int(input())
-s = input().rstrip()
-b = int(input())
-
-if s == "+":
-    print(a+b)
+if a == '+':
+    print(A + B)
 else:
-    print(a*b)
+    print(A * B)
