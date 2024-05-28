@@ -1,17 +1,13 @@
-import sys
+for _ in range(int(input())):
+    n, *arr = input().split()
 
-input = sys.stdin.readline
+    result = float(n)
+    for a in arr:
+        if a == '@':
+            result *= 3
+        elif a == '%':
+            result += 5
+        elif a == '#':
+            result -= 7
 
-T = int(input())
-for _ in range(T):
-    num, *data = input().split()
-    num = float(num)
-    for i in data:
-        if i == "@":
-            num *= 3
-        elif i == "%":
-            num += 5
-        elif i == "#":
-            num -= 7
-
-    print(f"{num:.2f}")
+    print(f'{result:.2f}')
