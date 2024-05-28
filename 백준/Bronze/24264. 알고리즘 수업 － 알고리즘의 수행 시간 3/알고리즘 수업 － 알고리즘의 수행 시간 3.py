@@ -1,3 +1,4 @@
-n = int(input().rstrip())
-print(n**2)
+N = int(input())
+
+print(N ** 2)
 print(2)
