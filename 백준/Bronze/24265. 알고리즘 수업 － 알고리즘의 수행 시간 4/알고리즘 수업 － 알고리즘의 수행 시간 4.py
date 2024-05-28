@@ -1,6 +1,6 @@
-n = int(input().rstrip())
-sum_n = 0
-for i in range(n):
-    sum_n += i
-print(sum_n)
+N = int(input())
+
+# N-1, N-2, ..., 1
+# (N-1) * (1 + N-1) // 2
+print((N-1) * N // 2)
 print(2)
