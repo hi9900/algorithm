@@ -1,16 +1,12 @@
-import sys
-input = sys.stdin.readline
-
 N, M = map(int, input().split())
-nohear = set()
-nosee = set()
-
+a = set()
+b = set()
 for _ in range(N):
-    nohear.add(input().rstrip())
-
+    a.add(input())
 for _ in range(M):
-    nosee.add(input().rstrip())
+    b.add(input())
 
-nohs = sorted(nohear & nosee)
-print(len(nohs))
-print(*nohs, sep="\n")
+result = sorted(list(a & b))
+
+print(len(result))
+print(*result, sep='\n')
