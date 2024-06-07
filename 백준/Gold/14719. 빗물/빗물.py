@@ -1,26 +1,15 @@
 H, W = map(int, input().split())
 blocks = list(map(int, input().split()))
-
-board = []
-for block in blocks:
-    tmp = [0] * (H - block) + [1] * block
-    board.append(tmp)
-
-board = list(zip(*board))
 result = 0
 
-for i in range(H):
-    cnt = 0
-    isBlock = False
-    for j in range(W):
-        if not isBlock and board[i][j] == 1:
-            isBlock = True
-            continue
-        if isBlock and board[i][j] == 0:
-            cnt += 1
-            continue
-        if isBlock and board[i][j] == 1:
-            result += cnt
-            cnt = 0
+# 양 끝 제외
+for i in range(1, W-1):
+    # blocks[i]를 기준으로 왼 / 오른쪽 최대
+    left_max = max(blocks[:i])
+    right_max = max(blocks[i+1:])
+
+    rain = min(left_max, right_max) - blocks[i]
+    if rain > 0:
+        result += rain
 
 print(result)
