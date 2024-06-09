@@ -1,0 +1,11 @@
+N = int(input())
+
+coins = [40, 20, 10, 5, 1]
+result = 0
+A = 0
+for coin in coins:
+	if N >= coin:
+		A, N = divmod(N, coin)
+		result += A
+	
+print(result)
