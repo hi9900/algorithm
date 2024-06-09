@@ -1,0 +1,13 @@
+N = int(input())
+arr = list(map(int, input().split()))
+
+sum_a = sum(arr)
+result = ''
+
+while sum_a >= 8:
+	sum_a, a = divmod(sum_a, 8)
+	result = str(a) + result
+	
+result = str(sum_a) + result
+
+print(result)
