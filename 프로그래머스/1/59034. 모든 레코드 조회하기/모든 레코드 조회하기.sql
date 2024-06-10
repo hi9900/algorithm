@@ -1,0 +1,2 @@
+SELECT * FROM ANIMAL_INS    -- 모든 동물의 정보
+ORDER BY ANIMAL_ID;         -- ANIMAL_ID 순
