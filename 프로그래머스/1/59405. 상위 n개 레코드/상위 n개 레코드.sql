@@ -1,0 +1,3 @@
+SELECT NAME FROM ANIMAL_INS    -- 이름
+ORDER BY DATETIME    -- 가장 먼저 들어온 동물
+LIMIT 1;
