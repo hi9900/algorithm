@@ -1,0 +1,3 @@
+SELECT ANIMAL_ID FROM ANIMAL_INS    -- ID 조회
+WHERE NAME IS NOT NULL    -- 이름이 있는 동물
+ORDER BY ANIMAL_ID;    -- ID 오름차순
