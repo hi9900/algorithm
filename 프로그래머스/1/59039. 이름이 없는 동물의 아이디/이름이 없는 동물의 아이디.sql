@@ -1,0 +1,3 @@
+SELECT ANIMAL_ID FROM ANIMAL_INS    -- ID
+WHERE NAME IS NULL    -- 이름이 없는 채로 들어온 동물
+ORDER BY ANIMAL_ID;    -- ID 오름차순
