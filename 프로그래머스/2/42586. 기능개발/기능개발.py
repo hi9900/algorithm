@@ -1,24 +1,28 @@
+from collections import deque
+import math
 def solution(progresses, speeds):
     N = len(progresses)
+    q = deque([])
     answer = []
     
-    fin = []    
     for i in range(N):
-        x, y = divmod((100 - progresses[i]), speeds[i])
-        if y == 0:
-            fin.append(x)
-        else:
-            fin.append(x+1)
+        # 남은 일수 계산
+        day = (100 - progresses[i]) / speeds[i]
+        q.append(math.ceil(day))
     
-    cnt = 1
-    s = fin[0]
-    for i in range(1, N):
-        if s >= fin[i]:
-            cnt += 1
+    # 배포될 기능
+    fn = 1
+    prev = q.popleft()
+    while q:
+        if q[0] <= prev: # 함께 배포
+            q.popleft()
+            fn += 1
         else:
-            print(cnt, s)
-            answer.append(cnt)
-            cnt = 1
-            s = fin[i]
-    answer.append(cnt)
+            answer.append(fn)
+            prev = q.popleft()
+            fn = 1
+
+    if len(q) == 0:
+        answer.append(fn)
+        
     return answer
