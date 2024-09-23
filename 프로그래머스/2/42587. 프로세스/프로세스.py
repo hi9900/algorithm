@@ -1,26 +1,18 @@
 from collections import deque
 
 def solution(priorities, location):
-    q = list(enumerate(priorities))
+    queue = deque(enumerate(priorities))
     count = 0
-    
-    while q:
-        count += 1
-        N = len(q)
-        run_i, run_p, idx = *q[0], 0
+    while queue:
+        i, p = queue.popleft()
         
-        for j in range(N):
-            i, p = q[j]
-            # 우선순위가 더 높은 프로세스 저장
-            if run_p < p:
-                idx = j
-                run_i, run_p = i, p
-                
-        # 프로세스 실행 (큐에서 삭제)
-        q = q[idx+1:] + q[:idx]
-        
-        # 찾는 프로세스이면, 값 반환
-        if run_i == location:
-            return count
-
+        # 우선순위가 높은 값이 있으면, 큐에 다시 넣기 
+        if any(p < q for (j, q) in queue):
+            queue.append((i, p))
+        # 방금 꺼낸 프로세스 실행
+        else:
+            count += 1
+            # 찾는 값이면 return
+            if location == i:
+                return count
     return count
