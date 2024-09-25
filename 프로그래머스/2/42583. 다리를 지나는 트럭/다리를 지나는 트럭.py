@@ -1,26 +1,22 @@
 from collections import deque
-
 def solution(bridge_length, weight, truck_weights):
-    answer = 1
-    N = len(truck_weights)
-    bridges = deque()
+    bridge = deque([0] * bridge_length)
+    trucks = deque(truck_weights)
+    sum_bridge = 0
     
-    # 트럭 무게, 경과 시간
-    bridges.append([truck_weights[0], 1])
-    i = 1
-    
-    while bridges:
-        answer += 1
-        sum_b = 0
-        for bridge in bridges:
-            bridge[1] += 1
-            sum_b += bridge[0]
-            
-        if bridges[0][1] > bridge_length:
-            sum_b -= bridges.popleft()[0]
-            
-        if i < N and sum_b + truck_weights[i] <= weight:
-            bridges.append([truck_weights[i], 1])
-            i += 1
-            
-    return answer
+    count = 0
+    while trucks:
+        count += 1
+        sum_bridge -= bridge.popleft()
+        
+        if sum_bridge + trucks[0] <= weight:
+            # 트럭을 다리에 올린다.
+            truck = trucks.popleft()
+            bridge.append(truck)
+            sum_bridge += truck
+        else:
+            bridge.append(0)
+        
+    # 마지막 트럭이 건널 때 까지 기다리기
+    count = count + bridge_length
+    return count
