@@ -1,8 +1,6 @@
 function solution(n) {
-    let answer = 0;
-    for (i=0; i<=n; i++) {
-        if (i % 2 !== 0) continue;
-        answer += i;
-    }
-    return answer;
+    return Array(n).fill()
+            .map((_, index) => index+1)
+            .filter(v => v % 2 === 0)
+            .reduce((a, c) => a + c, 0);
 }
