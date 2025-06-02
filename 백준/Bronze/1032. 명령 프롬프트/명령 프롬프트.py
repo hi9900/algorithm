@@ -1,19 +1,28 @@
 import sys
 input = sys.stdin.readline
 
-N = int(input())
-files = []
-for _ in range(N):
-    files.append(input().rstrip())
+n = int(input())
+arr = []
+# 입력
+for i in range(n):
+    x = input().strip()
+    arr.append(x)
 
-pattern = []
-for i in range(len(files[0])):
-    key = files[0][i]
-    for j in range(1, N):
-        if files[j][i] != key:
-            pattern.append('?')
+l = len(arr[0])
+ans = ''
+# i번째 자리의 문자가 모두 같으면 해당 문자 출력
+# 하나라도 다르면, ?
+for i in range(l):
+    tmp = ''
+    for a in arr:
+        if tmp == '':
+            tmp = a[i]
+            continue
+
+        if tmp != a[i]:
+            ans += '?'
             break
     else:
-        pattern.append(key)
+        ans += arr[0][i]
 
-print(*pattern, sep="")
+print(ans)
