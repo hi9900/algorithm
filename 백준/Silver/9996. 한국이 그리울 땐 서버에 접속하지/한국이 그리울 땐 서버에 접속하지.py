@@ -13,12 +13,8 @@ for _ in range(N):
         print("NE")
         continue
 
-    if file[0:p] != prefix:
-        print("NE")
+    if file.startswith(prefix) and file.endswith(suffix):
+        print("DA")
         continue
 
-    if file[-s:] != suffix:
-        print("NE")
-        continue
-
-    print("DA")
+    print("NE")
