@@ -12,6 +12,8 @@ for i in range(n):
                 rect = 0
 
                 for di, dj, idx in dij:
+                    isBreak = 0
+
                     if idx % 2:
                         dd = k1
                     else:
@@ -22,10 +24,13 @@ for i in range(n):
                         if 0 <= ni < n and 0 <= nj < n:
                             rect += grid[ni][nj]
                         else:
+                            isBreak = 1
                             break
-
+                    if isBreak:
+                        break
                     # 다음 꼭짓점
                     r, c = r + di * dd, c + dj * dd
+
                 else:
                     answer = max(answer, rect)
 
