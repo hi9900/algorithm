@@ -1,14 +1,15 @@
 import sys
 input = sys.stdin.readline
 
-N = int(input())
-arr = list(map(int, input().split(" ")))
-arr.sort()
+n = int(input())
+m = list(map(int, input().split()))
+m.sort()
 
-res = 1
-for w in arr:
-    if w > res:
+ans = 1
+
+for w in m:
+    if w > ans:
         break
-    res += w
-
-print(res)
+    ans += w
+    
+print(ans)
