@@ -1,24 +1,25 @@
 import sys
 input = sys.stdin.readline
 
-M, N = map(int, input().split(" "))
-arr = list(map(int, input().split(" ")))
+m, n = map(int, input().split())
+l = list(map(int, input().split()))
+
+s, e = 1, max(l)
 ans = 0
 
-low = 1
-high = max(arr)
+while 1:
+    if s > e:
+        break
 
-while low <= high:
-    mid = (low + high) // 2
+    mid = (s + e) // 2
+    pieces = 0
+    for i in l:
+        pieces += i // mid
 
-    count = 0
-    for a in arr:
-        count += a // mid
-
-    if count >= M:
-        ans = max(ans, mid)
-        low = mid + 1
+    if pieces >= m:
+        ans = mid
+        s = mid + 1
     else:
-        high = mid - 1
+        e = mid - 1
 
 print(ans)
