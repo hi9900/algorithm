@@ -3,18 +3,21 @@ N, K = map(int, input().split())
 # 1. N -= 1
 # 2. N //= K
 
+'''
+# 나눌 수 있으면 나누기
 num = 0
 while 1:
     if N == 1:
         break
-    # N이 K로 나누어 떨어지지 않으면 1번
+    # N이 K로 나누어 떨어지지 않으면 1번 연산
     if N % K:
         N -= 1
-    # 나누어 떨어지면 2번
+    # 나누어 떨어지면 2번 연산
     else:
         N //= K
     num += 1
 print(num)
+'''
 
 # N이 큰 수일때,
 result = 0
