@@ -1,13 +1,14 @@
 import sys
 input = sys.stdin.readline
 
-N, M = map(int, input().split(' '))
+n, m = map(int, input().split())
 
-if N == 1:
+if n == 1:
     print(1)
-elif N == 2:
-    print(min(4, 1 + (M - 1) // 2))
-elif M < 7:
-    print(min(4, M))
+elif n == 2:
+    print(min((m-1)//2 + 1, 4))
 else:
-    print(M - 2)
+    if m <= 6:
+        print(min(m, 4))
+    else:
+        print(m - 2)
