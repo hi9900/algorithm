@@ -28,3 +28,35 @@ while 1:
         break
 
 print(H)
+
+
+'''
+# 2. 재귀 풀이
+'''
+def binary_search(start, end):
+    global data, h, M
+
+    if start > end:
+        return
+
+    # 절단기 높이
+    mid = (start + end) // 2
+
+    # 절단 길이
+    cut = 0
+    for height in data:
+        cut += max(0, height - mid)
+
+    if cut >= M:
+        h = max(h, mid)
+        # 높이 을리기
+        binary_search(mid + 1, end)
+    else:
+        # 높이 낮추기
+        binary_search(start, mid - 1)
+
+
+h = 0
+binary_search(0, max(data))
+print(h)
+
