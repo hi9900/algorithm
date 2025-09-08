@@ -1,0 +1,5 @@
+-- 코드를 입력하세요
+SELECT FLAVOR FROM FIRST_HALF
+WHERE TOTAL_ORDER > 3000 -- 상반기 아이스크림 총주문량이 3,000보다 높으면서
+    AND FLAVOR IN (SELECT FLAVOR FROM ICECREAM_INFO WHERE INGREDIENT_TYPE = 'fruit_based') -- 아이스크림의 주 성분이 과일
+ORDER BY TOTAL_ORDER DESC -- 총주문량이 큰 순서대로
