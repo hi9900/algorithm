@@ -33,11 +33,11 @@ def dijkstra(start):
             continue
         
         # 현재 노드와 연결된 노드 확인
-        for i in graph[now]:
-            cost = dist + i[1]
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+        for n, c in graph[now]:
+            cost = dist + c
+            if cost < distance[n]:
+                distance[n] = cost
+                heapq.heappush(q, (cost, n))
 
 dijkstra(start)
 

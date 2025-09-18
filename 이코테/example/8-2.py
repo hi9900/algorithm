@@ -31,24 +31,24 @@ def dijkstra(start):
             continue
 
         # now와 연결된 통로 확인
-        for i in graph[now]:
-            # start -> now -> i[0]
-            cost = dist + i[1]
-            # now를 거쳐서 i[0]으로 가는 경우가 더 짧으면,
+        for n, c in graph[now]:
+            # start -> now -> n
+            cost = dist + c
+            # now를 거쳐서 n으로 가는 경우가 더 짧으면,
             # 그 거리로 갱신하고, 우선순위 큐에 삽입
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+            if cost < distance[n]:
+                distance[n] = cost
+                heapq.heappush(q, (cost, n))
 
 
 dijkstra(C)
 
 cnt, time = 0, 0
-for i in range(1, N+1):
-    # 무한이 아니면, 해당 도시에 전보 가능 / 자기 자신은 0이므로 제외
+for d in distance:
+    # 무한이 아니면, 해당 도시에 전보 가능
     # 무한이 아닌 값들 중에서 최댓값이 전체 걸리는 시간
-    if distance[i] < 1e9 and distance[i] != 0:
+    if d < 1e9:
         cnt += 1
-        time = max(time, distance[i])
+        time = max(time, d)
 
-print(cnt, time)
+print(cnt - 1, time)
