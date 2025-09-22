@@ -18,6 +18,8 @@ N, M = map(int, input().split())
 parent = list(range(N+1))
 
 edges = []
+result = 0
+last = 0
 
 for _ in range(M):
     # A -> B : C
@@ -26,13 +28,13 @@ for _ in range(M):
 
 # 비용 기준 정렬
 edges.sort()
-result = []
 
 for cost, a, b in edges:
     # 사이클이 발생하지 않으면 == 루트 노드가 다르면 포함
     if find_parent(parent, a) != find_parent(parent, b):
         union(parent, a, b)
-        result.append(cost)
+        result += cost
+        last = cost
 
 # 맨 마지막 cost 제외
-print(sum(result[:N-2]))
+print(result - last)

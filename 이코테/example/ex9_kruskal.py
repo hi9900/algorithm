@@ -32,8 +32,7 @@ for _ in range(e):
 
 edges.sort()
 
-for edge in edges:
-    cost, a, b = edge
+for cost, a, b in edges:
     # 사이클이 발생하지 않는 경우에만 집합에 포함
     if find_parent(parent, a) != find_parent(parent, b):
         union_parent(parent, a, b)

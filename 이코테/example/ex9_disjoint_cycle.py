@@ -4,6 +4,7 @@ def find_parent(parent, x):
         parent[x] = find_parent(parent, parent[x])
     return parent[x]
 
+
 # 두 원소가 속한 집합 합치기
 def union_parent(parent, a, b):
     a = find_parent(parent, a)
@@ -13,6 +14,7 @@ def union_parent(parent, a, b):
         parent[b] = a
     else:
         parent[a] = b
+
 
 # 노드의 개수와 간선의 개수 입력
 v, e = map(int, input().split())
