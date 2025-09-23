@@ -1,7 +1,7 @@
 S = input()
+result = 0
 
-result = int(S[0])
-for i in S[1:]:
+for i in S:
     i = int(i)
     if i <= 1 or result <= 1:
         result += i
