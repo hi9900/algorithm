@@ -1,24 +1,13 @@
-S = input()
+import sys
+input = sys.stdin.readline
 
-# 연속된 0 또는 1의 묶음 갯수
-cnt = {
-    '0': 0,
-    '1': 0
-}
+S = list(map(int, input().rstrip()))
+counts = [0, 0]
+N = len(S)
 
-# 이전 값
-before = S[0]
+for i in range(1, N):
+    if S[i-1] != S[i]:
+        counts[S[i-1]] += 1
 
-for i in S[1:]:
-    # 이전 값과 다르면,
-    if i != before:
-        # 이전 값까지 한 묶음처리
-        cnt[before] += 1
-        # 새로운 묶음으로 표시
-        before = i
-
-# 마지막 묶음 체크
-cnt[before] += 1
-
-# 둘 중 작은 값
-print(min(cnt['0'], cnt['1']))
+counts[S[N-1]] += 1
+print(min(counts))
