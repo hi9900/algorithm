@@ -1,12 +1,10 @@
-N = input()
+import sys
+input = sys.stdin.readline
 
-l = len(N) // 2
-front = N[:l]
-back = N[l:]
+n = input().rstrip()
+l, r = n[:len(n)//2], n[len(n)//2:]
 
-sum_f, sum_b = 0, 0
-for i in range(l):
-    sum_f += int(front[i])
-    sum_b += int(back[i])
-
-print('LUCKY') if sum_f == sum_b else print('READY')
+if sum(map(int, l)) == sum(map(int, r)):
+    print('LUCKY')
+else:
+    print('READY')
