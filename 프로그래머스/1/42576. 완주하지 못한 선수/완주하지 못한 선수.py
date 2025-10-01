@@ -1,12 +1,14 @@
 def solution(participant, completion):
-    partDict = dict()
-    resultHash = 0
-    
-    for part in participant:
-        partDict[hash(part)] = part
-        resultHash += hash(part)
-    
-    for comp in completion:
-        resultHash -= hash(comp)
+    participant_map = dict()
+    for p in participant:
+        if p in participant_map:
+            participant_map[p] += 1
+        else:
+            participant_map[p] = 1
+            
+    for c in completion:
+        participant_map[c] -= 1
         
-    return partDict[resultHash]
+    for name in participant_map:
+        if participant_map[name] == 1:
+            return name
