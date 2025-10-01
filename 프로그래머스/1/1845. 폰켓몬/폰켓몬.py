@@ -1,8 +1,9 @@
+from collections import Counter
+
 def solution(nums):
     N = len(nums)
-    # 폰켓몬의 총 종류
-    M = len(set(nums))
     
-    answer = min(N // 2, M)
+    count = Counter(nums)
+    count_keys = len(count.keys())
     
-    return answer
+    return min(N/2, count_keys)
