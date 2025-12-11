@@ -7,13 +7,13 @@ let arr = input[1].split(' ').map(Number);
 let arrow = new Array(1_000_001).fill(0);
 let cnt = 0;
 
-for (let x of arr) {
-  if (arrow[x] === 0) {
-    arrow[x - 1] += 1;
+for (let i = 0; i < n; i++) {
+  if (arrow[arr[i]] === 0) {
+    arrow[arr[i] - 1] += 1;
     cnt += 1;
   } else {
-    arrow[x] -= 1;
-    arrow[x - 1] += 1;
+    arrow[arr[i]] -= 1;
+    arrow[arr[i] - 1] += 1;
   }
 }
 
